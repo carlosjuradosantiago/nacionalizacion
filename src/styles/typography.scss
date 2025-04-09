@@ -1,0 +1,59 @@
+/* Estilos globales para tipografía */
+
+body {
+  font-family: Inter, sans-serif;
+  color: #333;
+}
+
+/* Estilos para texto pequeño (usado en tablas, etiquetas, etc.) */
+.text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+/* Estilos para textos en tablas */
+.p-datatable {
+  .p-datatable-tbody > tr > td {
+    font-size: .875rem;
+    line-height: 1.25rem;
+  }
+  
+  .p-datatable-thead > tr > th {
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 600;
+  }
+}
+
+/* Estilos para etiquetas de formulario */
+label {
+  font-size: .875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+/* Estilos para encabezados */
+h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+/* Estilos para texto de paginación y contadores */
+.paginator-text,
+.counter-text {
+  font-size: .875rem;
+  line-height: 1.25rem;
+} 

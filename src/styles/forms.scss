@@ -1,0 +1,126 @@
+/* Estilos globales para formularios y campos de entrada */
+
+/* Variables */
+:root {
+  --input-height: 40px;
+  --input-border-color: #ced4da;
+  --input-border-radius: 4px;
+  --input-padding: 0.5rem 1rem;
+  --input-font-size: 0.875rem;
+}
+
+/* Altura uniforme para todos los elementos de formulario */
+.p-dropdown,
+.p-inputtext,
+.p-calendar,
+.p-multiselect,
+.p-password input,
+.p-autocomplete-input {
+  height: var(--input-height) !important;
+  font-size: var(--input-font-size);
+}
+
+/* Estilos para campos de texto */
+.p-inputtext {
+  border-radius: var(--input-border-radius);
+  border-color: var(--input-border-color);
+  padding: var(--input-padding);
+  width: 100%;
+  
+  &:enabled:focus {
+    border-color: var(--migraciones-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 85, 164, 0.25);
+  }
+  
+  &.ng-invalid.ng-dirty {
+    border-color: #f44336;
+  }
+}
+
+/* Estilos para dropdown */
+.p-dropdown {
+  border-radius: var(--input-border-radius);
+  
+  .p-dropdown-label {
+    padding: var(--input-padding);
+    font-size: var(--input-font-size);
+  }
+  
+  .p-dropdown-trigger {
+    width: 3rem;
+  }
+  
+  .p-dropdown-panel {
+    border-radius: var(--input-border-radius);
+    
+    .p-dropdown-items {
+      padding: 0.5rem 0;
+      
+      .p-dropdown-item {
+        padding: 0.5rem 1rem;
+        font-size: var(--input-font-size);
+        
+        &.p-highlight {
+          background-color: rgba(0, 85, 164, 0.08);
+          color: var(--migraciones-blue);
+        }
+      }
+    }
+  }
+}
+
+/* Etiquetas de formulario */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: var(--input-font-size);
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Grupos de entrada */
+.p-inputgroup {
+  .p-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .p-inputgroup-addon:last-child,
+  button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: var(--input-border-radius);
+    border-bottom-right-radius: var(--input-border-radius);
+  }
+}
+
+/* Mensajes de error */
+.p-error {
+  color: #f44336;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Estilos para formularios en tarjetas */
+.form-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid #e9e9e9;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  .form-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+} 

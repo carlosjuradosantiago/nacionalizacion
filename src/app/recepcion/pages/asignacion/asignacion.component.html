@@ -1,0 +1,250 @@
+<div class="asignacion-container">
+  <div class="breadcrumb">
+    Recepción / Asignación de trámites
+  </div>
+  
+  <h1>Asignación de trámites</h1>
+  
+  <!-- Formulario de búsqueda -->
+  <div class="surface-card p-4 mb-4">
+    <div class="grid">
+      <!-- Tipo de trámite -->
+      <div class="col-12 md:col-6 mb-3">
+        <label class="block mb-2">Tipo de trámite</label>
+        <p-dropdown
+          [options]="[]"
+          [(ngModel)]="tipoTramite"
+          placeholder="Ingrese tipo de trámite"
+          [style]="{'width':'100%'}"
+          appendTo="body"
+        ></p-dropdown>
+      </div>
+      
+      <!-- Número de trámite -->
+      <div class="col-12 md:col-6 mb-3">
+        <label class="block mb-2">Número de trámite</label>
+        <input 
+          type="text" 
+          pInputText 
+          [(ngModel)]="numeroTramite" 
+          placeholder="Ingrese número de trámite" 
+          class="w-full"
+        />
+      </div>
+    </div>
+    
+    <div class="flex mt-3">
+      <button 
+        pButton 
+        type="button" 
+        icon="pi pi-search" 
+        label="Búsqueda Avanzada"
+        class="busqueda-avanzada-btn mr-auto"
+        (click)="busquedaAvanzada()"
+        title="Búsqueda Avanzada"
+      ></button>
+      
+      <div class="flex gap-2">
+        <button 
+          pButton 
+          type="button" 
+          label="Limpiar" 
+          class="p-button-outlined"
+          (click)="limpiar()"
+          title="Limpiar"
+        ></button>
+        
+        <button 
+          pButton 
+          type="button" 
+          icon="pi pi-search" 
+          label="Buscar" 
+          class="p-button-primary"
+          (click)="buscar()"
+          title="Buscar"
+        ></button>
+      </div>
+    </div>
+    
+    <!-- Campos de búsqueda avanzada (expandibles) -->
+    <div *ngIf="mostrarBusquedaAvanzada" class="grid mt-4 advanced-search-container">
+      <!-- Fecha inicio -->
+      <div class="col-12 md:col-3 mb-3 calendar-container">
+        <label class="block mb-2">Fecha inicio</label>
+        <p-calendar
+          [(ngModel)]="fechaInicio"
+          [showIcon]="false"
+          dateFormat="dd/mm/yy"
+          placeholder="dd/mm/aaaa"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%', 'padding-right': '35px'}"
+          appendTo="body"
+          [showButtonBar]="false"
+        ></p-calendar>
+        <span class="calendar-icon-overlay">
+          <i class="pi pi-calendar"></i>
+        </span>
+      </div>
+      
+      <!-- Fecha fin -->
+      <div class="col-12 md:col-3 mb-3 calendar-container">
+        <label class="block mb-2">Fecha fin</label>
+        <p-calendar
+          [(ngModel)]="fechaFin"
+          [showIcon]="false"
+          dateFormat="dd/mm/yy"
+          placeholder="dd/mm/aaaa"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%', 'padding-right': '35px'}"
+          appendTo="body"
+          [showButtonBar]="false"
+        ></p-calendar>
+        <span class="calendar-icon-overlay">
+          <i class="pi pi-calendar"></i>
+        </span>
+      </div>
+      
+      <!-- Tipo de documento -->
+      <div class="col-12 md:col-3 mb-3">
+        <label class="block mb-2">Tipo de documento</label>
+        <p-dropdown
+          [options]="[]"
+          [(ngModel)]="tipoDocumento"
+          placeholder="Seleccionar"
+          [style]="{'width':'100%'}"
+          appendTo="body"
+        ></p-dropdown>
+      </div>
+      
+      <!-- Número de documento -->
+      <div class="col-12 md:col-3 mb-3">
+        <label class="block mb-2">Número de documento</label>
+        <input 
+          type="text" 
+          pInputText 
+          [(ngModel)]="numeroDocumento" 
+          placeholder="Ingrese número de documento" 
+          class="w-full"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sección de estadísticas -->
+  <div class="surface-card p-4 mb-4">
+    <div class="flex flex-wrap align-items-center justify-content-between">
+      <div class="font-medium">
+        {{tramitesPendientes}} trámites sin asignar
+      </div>
+      <div class="flex flex-wrap align-items-center gap-3">
+        <div class="flex align-items-center">
+          <i class="pi pi-check-circle text-green-500 mr-2"></i>
+          <span>Dentro del plazo ({{tramitesDentroPlazo}})</span>
+        </div>
+        <div class="flex align-items-center">
+          <i class="pi pi-clock text-yellow-500 mr-2"></i>
+          <span>Plazo por vencer ({{tramitesPorVencer}})</span>
+        </div>
+        <div class="flex align-items-center">
+          <i class="pi pi-exclamation-triangle text-red-500 mr-2"></i>
+          <span>Plazo vencido ({{tramitesVencidos}})</span>
+        </div>
+        <button 
+          pButton 
+          type="button" 
+          label="Asignar trámites"
+          class="p-button-primary ml-3"
+          (click)="asignarTramites()"
+          [disabled]="!hayTramitesSeleccionados()"
+          title="Asignar trámites"
+        ></button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tabla de trámites -->
+  <div class="surface-card">
+    <p-table 
+      [value]="tramites" 
+      [paginator]="false" 
+      [rows]="rows" 
+      [showCurrentPageReport]="false"
+      styleClass="p-datatable-sm"
+      [tableStyle]="{'min-width': '100%'}"
+      class="border-none"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-checkbox 
+              [(ngModel)]="seleccionarTodos" 
+              (onChange)="onSeleccionarTodosChange($event)"
+              [binary]="true"
+              inputId="seleccionarTodos"
+            ></p-checkbox>
+          </th>
+          <th>N° DE TRÁMITE</th>
+          <th>TIPO DE TRÁMITE</th>
+          <th>FECHA DE REGISTRO</th>
+          <th>ESTADO</th>
+          <th>ADMINISTRADO</th>
+          <th>ASIGNADO</th>
+          <th>ACCIÓN</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-tramite>
+        <tr>
+          <td>
+            <p-checkbox 
+              [ngModel]="tramitesSeleccionados.includes(tramite)" 
+              (onChange)="onSeleccionFilaChange(tramite, $event)"
+              [binary]="true"
+              [inputId]="'cb_' + tramite.id"
+            ></p-checkbox>
+          </td>
+          <td>
+            <div class="flex align-items-center">
+              <i *ngIf="tramite.plazo === 'dentro_plazo'" class="pi pi-check-circle text-green-500 mr-2"></i>
+              <i *ngIf="tramite.plazo === 'por_vencer'" class="pi pi-clock text-yellow-500 mr-2"></i>
+              <i *ngIf="tramite.plazo === 'vencido'" class="pi pi-exclamation-triangle text-red-500 mr-2"></i>
+              {{tramite.id}}
+            </div>
+          </td>
+          <td>{{tramite.tipo}}</td>
+          <td>{{tramite.fecha}}</td>
+          <td>
+            <span class="pending-tag">{{tramite.estado}}</span>
+          </td>
+          <td>
+            <div>{{tramite.administrado.nombre}}</div>
+            <div class="text-sm text-gray-500">{{tramite.administrado.nacionalidad}}</div>
+          </td>
+          <td>Sin asignar</td>
+          <td>
+            <button 
+              pButton 
+              type="button" 
+              label="Ver detalle" 
+              class="p-button-sm p-button-table-action"
+              title="Ver detalle"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    
+    <!-- Paginador -->
+    <div class="flex justify-content-between align-items-center p-4 border-top-1 border-300">
+      <div class="text-sm text-gray-600">
+        Mostrando 1 a {{rows}} de {{totalRecords}} resultados
+      </div>
+      <p-paginator 
+        [rows]="rows" 
+        [totalRecords]="totalRecords"
+        [first]="first"
+        [rowsPerPageOptions]="[10]"
+        (onPageChange)="onPageChange($event)"
+      ></p-paginator>
+    </div>
+  </div>
+</div> 

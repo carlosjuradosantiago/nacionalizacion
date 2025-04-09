@@ -1,0 +1,224 @@
+/* Importar PrimeFlex */
+@import "primeflex/primeflex.css";
+
+:host {
+  display: block;
+  height: 100vh; /* Asegura que el componente ocupe toda la altura */
+  /* Quitar background y overflow de aquí */
+}
+
+/* Variables de color basadas en el ejemplo (aún definidas pero no usadas en :host background) */
+:root {
+  --migraciones-blue: #003366; /* Azul oscuro principal */
+  --migraciones-cyan: #007bff; /* Azul/Cyan más claro para gradiente */
+  --migraciones-green: #8CC63F; /* Verde para detalles (candado, línea) */
+  --migraciones-text-light: #e0e0e0; /* Texto claro sobre fondo oscuro */
+  --migraciones-text-dark: #333333; /* Texto oscuro principal */
+  --migraciones-text-secondary: #555555; /* Texto secundario */
+  --migraciones-border: #ced4da; /* Borde de input por defecto */
+  --migraciones-border-focus: #0056b3; /* Borde de input al enfocar */
+  --migraciones-button-bg: var(--migraciones-blue);
+  --migraciones-button-hover: #002244; /* Un azul más oscuro para hover */
+}
+
+.login-container {
+  /* Gradiente ajustado con los colores definidos */
+  background: linear-gradient(135deg, #003F8F 0%, rgb(0 65 150 / .75) 50%, rgb(30 140 190 / .65) 100%);
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  height: 100%;
+}
+
+.login-card {
+  background-color: #ffffff;
+  /* Re-introducir max-width forzado */
+  max-width: 920px !important;
+  width: 100%;
+}
+
+.left-section {
+  /* Fondo semi-transparente simple */
+  background-color: rgba(0, 51, 102, 0.9);
+  color: white;
+  /* Reducir padding horizontal al mínimo */
+  padding: 1.8rem 1rem; /* Padding horizontal mínimo */
+  @media screen and (min-width: 992px) { /* lg breakpoint */
+      padding: 2.8rem 1.5rem; /* Padding horizontal mínimo */
+  }
+
+  .logo {
+    /* Se ajustará en HTML */
+  }
+
+  /* Estilos para la doble línea */
+  .decorative-lines {
+    display: flex;
+    gap: 0.3rem; /* Espacio entre líneas */
+    justify-content: center;
+    .line {
+      height: 3px;
+      width: 60px; /* Ancho de cada línea */
+    }
+    .line-1 {
+      background-color: #8CC63F; /* Verde */
+    }
+    .line-2 {
+       background-color: #F39C12; /* Amarillo/Dorado */
+    }
+  }
+
+  .lock-icon-container {
+    /* Contenedor para posicionar círculos */
+  }
+
+  .lock-icon-wrapper {
+    width: 80px; /* Tamaño del ejemplo */
+    height: 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Círculos decorativos */
+    .decorative-circle-outer,
+    .decorative-circle-inner,
+    .decorative-circle-progress {
+      position: absolute;
+      border-radius: 50%;
+      left: 0; top: 0; right: 0; bottom: 0;
+    }
+
+    .decorative-circle-outer {
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    .decorative-circle-inner {
+       /* Círculo interior más pequeño */
+      border: 1px solid transparent; /* Puedes usar un fondo */
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 70%; /* Ajusta tamaño */
+      height: 70%;
+      margin: auto;
+    }
+    .decorative-circle-progress {
+       /* Círculo de progreso con color verde/amarillo */
+      border: 3px solid transparent;
+      border-top-color: #8CC63F;
+      border-right-color: #8CC63F;
+      transform: rotate(-45deg);
+    }
+
+    .lock-icon {
+      font-size: 32px; /* Tamaño del icono */
+      position: relative; /* Asegura que esté sobre los círculos */
+      z-index: 2;
+    }
+  }
+
+  .title {
+    line-height: normal; /* Reset */
+  }
+
+  .description {
+    line-height: 1.3; /* Ajustar line-height para que ocupe 2 líneas */
+    font-size: 0.95rem; /* Reducir tamaño base */
+    @media screen and (min-width: 768px) { /* md breakpoint */
+      font-size: 1rem; /* Ajustar ligeramente en pantallas medianas/grandes */
+    }
+  }
+
+  /* Simulación de círculos borrosos de fondo */
+  .background-blur-circle-1,
+  .background-blur-circle-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px); /* Ajusta el desenfoque */
+    z-index: 0;
+  }
+  .background-blur-circle-1 {
+    width: 150px; height: 150px;
+    background-color: rgba(0, 123, 255, 0.15); /* Cyan */
+    top: -50px; left: -50px;
+  }
+  .background-blur-circle-2 {
+    width: 200px; height: 200px;
+    background-color: rgba(140, 198, 63, 0.15); /* Green */
+    bottom: -70px; right: -70px;
+  }
+}
+
+.right-section {
+  background-color: #ffffff;
+  /* Reducir padding vertical ligeramente */
+  padding: 1.8rem 2.5rem;
+  @media screen and (min-width: 992px) { /* lg breakpoint */
+      padding: 2.8rem;
+  }
+
+  .form-title {
+    color: var(--migraciones-text-dark);
+    /* Estilos aplicados por PrimeFlex */
+  }
+
+  label {
+    color: var(--migraciones-text-secondary);
+     /* Estilos aplicados por PrimeFlex */
+  }
+
+  /* Quitar overrides de padding para inputs */
+  :host ::ng-deep .p-inputtext,
+  :host ::ng-deep .p-password .p-inputtext {
+    border: 1px solid var(--migraciones-border);
+    transition: border-color 0.2s;
+    &:focus {
+      border-color: var(--migraciones-border-focus) !important;
+      box-shadow: none; /* Evitar sombra de PrimeNG si no se desea */
+    }
+  }
+
+  /* Estilos para el pButton */
+  .p-button-primary.p-button {
+    /* Estos estilos ahora están en buttons.scss global */
+    &.p-button {
+      /* Usamos las clases auxiliares para mantener la consistencia */
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }
+
+  .forgot-password-link {
+    color: var(--migraciones-button-bg);
+    /* Hover aplicado por PrimeFlex */
+  }
+
+  .support-text {
+    /* Estilos aplicados por PrimeFlex */
+    a {
+      color: var(--migraciones-button-bg);
+    }
+  }
+}
+
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 991px) { /* lg breakpoint de PrimeFlex */
+  .login-card {
+     /* El redondeo se aplica a todo el card en móvil */
+     border-radius: 15px !important; /* Sobreescribir si es necesario */
+  }
+
+  .left-section {
+    /* Redondeo superior en móvil */
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  .right-section {
+     /* Redondeo inferior en móvil */
+    border-bottom-left-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+    border-top-right-radius: 0 !important;
+  }
+}

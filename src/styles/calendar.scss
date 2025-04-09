@@ -1,0 +1,146 @@
+/* Estilos globales para componentes de calendario */
+
+/* Selector de fecha con icono integrado */
+.calendar-container {
+  position: relative;
+  
+  .calendar-icon-overlay {
+    position: absolute;
+    right: 12px;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #6c757d;
+    font-size: 14px;
+    pointer-events: none;
+  }
+}
+
+/* Estilos para el componente p-calendar */
+.p-calendar {
+  width: 100%;
+  
+  .p-inputtext {
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    padding-right: 35px;
+  }
+  
+  /* Botón de calendario cuando se muestra como trigger */
+  .p-datepicker-trigger {
+    background-color: #3b7ddd;
+    border-color: #3b7ddd;
+    color: #ffffff;
+    border-radius: 0 4px 4px 0;
+    width: 42px;
+    height: 40px;
+    
+    &:hover {
+      background-color: #2e6dc8;
+      border-color: #2e6dc8;
+    }
+    
+    .p-button-icon {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* Panel del calendario emergente */
+  .p-datepicker {
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    
+    .p-datepicker-header {
+      padding: 0.5rem;
+      border-bottom: 1px solid #dee2e6;
+      margin-bottom: 0.5rem;
+      
+      .p-datepicker-title {
+        .p-datepicker-month,
+        .p-datepicker-year {
+          color: #003366;
+          font-weight: 600;
+        }
+      }
+      
+      .p-datepicker-prev,
+      .p-datepicker-next {
+        color: #6c757d;
+        width: 2rem;
+        height: 2rem;
+        
+        &:hover {
+          background-color: #f8f9fa;
+          color: #003366;
+        }
+      }
+    }
+    
+    .p-datepicker-calendar {
+      font-size: 0.875rem;
+      
+      th {
+        font-weight: 600;
+        color: #6c757d;
+        padding: 0.5rem;
+      }
+      
+      td {
+        padding: 0.2rem;
+        
+        .p-highlight {
+          background-color: var(--migraciones-blue);
+          color: #ffffff;
+        }
+        
+        .p-disabled {
+          opacity: 0.5;
+        }
+        
+        &:not(.p-disabled) .p-state-hover {
+          background-color: #f8f9fa;
+        }
+      }
+    }
+  }
+}
+
+/* Botón de selección de fecha personalizado */
+.fecha-picker-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #fff;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #495057;
+  transition: border-color 0.15s ease-in-out;
+  
+  &:hover {
+    background-color: #f8f9fa;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  span {
+    flex: 1;
+    color: #757575;
+  }
+  
+  i {
+    font-size: 0.875rem;
+    color: #555;
+  }
+} 

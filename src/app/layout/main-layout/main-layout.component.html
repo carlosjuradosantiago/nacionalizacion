@@ -1,0 +1,197 @@
+<!-- Header -->
+<header class="header shadow-1">
+  <div class="flex align-items-center">
+    <span class="header-icon mr-2 cursor-pointer" (click)="toggleMenu()" title="Mostrar/ocultar menú">
+      <i class="pi pi-bars"></i>
+    </span>
+    
+    <div class="logo-container flex align-items-center">
+      <img src="assets/images/img-logo-migraciones-blanco.png" alt="Migraciones" class="logo">
+      <h2 class="system-title text-white m-0">SISTEMA DE NACIONALIZACIÓN</h2>
+    </div>
+  </div>
+
+  <div class="flex align-items-center">
+    <!-- Notificaciones -->
+    <span class="header-icon mr-3 cursor-pointer relative" title="Notificaciones">
+      <i class="pi pi-bell"></i>
+      <span class="notification-badge">3</span>
+    </span>
+    
+    <!-- Perfil de usuario -->
+    <div class="flex align-items-center user-profile">
+      <div class="user-avatar-circle">
+        <i class="pi pi-user"></i>
+      </div>
+      <div class="flex flex-column">
+        <span class="font-medium text-white">{{username}}</span>
+        <span class="text-white-alpha-70 text-sm">{{userRole}}</span>
+      </div>
+      <span class="header-icon ml-2 cursor-pointer" (click)="logout()" title="Cerrar sesión">
+        <i class="pi pi-power-off"></i>
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- Contenedor principal -->
+<div class="layout-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [ngClass]="{'sidebar-collapsed': !menuVisible}">
+    <div class="overflow-y-auto">
+
+      <!-- Menú Expandido (con texto y secciones) -->
+      <ul class="menu-list" *ngIf="menuVisible">
+        <!-- Inicio -->
+        <li class="menu-item">
+          <a routerLink="/dashboard" routerLinkActive="active-link" class="menu-link">
+            <i class="pi pi-home"></i>
+            <span>Inicio</span>
+          </a>
+        </li>
+        
+        <!-- Recepción -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('recepcion')">
+              <i class="pi pi-inbox"></i>
+              <span>Recepción</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['recepcion'], 'pi-chevron-up': expandedSections['recepcion']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('recepcion')">
+              <li><a routerLink="/recepcion/asignacion" routerLinkActive="active-link"><i class="pi pi-user-plus"></i><span>Asignación</span></a></li>
+              <li><a routerLink="/recepcion/reasignacion" routerLinkActive="active-link"><i class="pi pi-sync"></i><span>Reasignación</span></a></li>
+              <li><a routerLink="/recepcion/verificar-documentos" routerLinkActive="active-link"><i class="pi pi-check-square"></i><span>Verificar Documentos</span></a></li>
+            </ul>
+          </div>
+        </li>
+        
+        <!-- Evaluación -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('evaluacion')">
+              <i class="pi pi-file-edit"></i>
+              <span>Evaluación</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['evaluacion'], 'pi-chevron-up': expandedSections['evaluacion']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('evaluacion')">
+              <li><a routerLink="/evaluacion/evaluar-tramite" routerLinkActive="active-link"><i class="pi pi-file"></i><span>Evaluar trámite</span></a></li>
+              <li><a routerLink="/evaluacion/reasignacion" routerLinkActive="active-link"><i class="pi pi-refresh"></i><span>Reasignación</span></a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Control de Calidad -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('calidad')">
+              <i class="pi pi-check-circle"></i>
+              <span>Control de Calidad</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['calidad'], 'pi-chevron-up': expandedSections['calidad']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('calidad')">
+              <li><a routerLink="/calidad/bandeja" routerLinkActive="active-link"><i class="pi pi-inbox"></i><span>Bandeja de Documentos</span></a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Emisión del Título -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('titulo')">
+              <i class="pi pi-id-card"></i>
+              <span>Emisión del Título</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['titulo'], 'pi-chevron-up': expandedSections['titulo']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('titulo')">
+              <li><a routerLink="/titulo/registrar" routerLinkActive="active-link"><i class="pi pi-pencil"></i><span>Registrar Título</span></a></li>
+              <li><a routerLink="/titulo/ceremonia" routerLinkActive="active-link"><i class="pi pi-users"></i><span>Ceremonia</span></a></li>
+              <li><a routerLink="/titulo/bandeja" routerLinkActive="active-link"><i class="pi pi-inbox"></i><span>Bandeja de Documentos</span></a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Consultas -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('consultas')">
+              <i class="pi pi-search"></i>
+              <span>Consultas</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['consultas'], 'pi-chevron-up': expandedSections['consultas']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('consultas')">
+              <li><a routerLink="/consultas/tramite" routerLinkActive="active-link"><i class="pi pi-search"></i><span>Consulta de Trámite</span></a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Gestión Documental -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('gestionDocumental')">
+              <i class="pi pi-folder"></i>
+              <span>Gestión Documental</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['gestionDocumental'], 'pi-chevron-up': expandedSections['gestionDocumental']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('gestionDocumental')">
+              <li><a routerLink="/gestion-documental/elaborar" routerLinkActive="active-link"><i class="pi pi-file-edit"></i><span>Elaborar Documento</span></a></li>
+              <li><a routerLink="/gestion-documental/bandeja" routerLinkActive="active-link"><i class="pi pi-inbox"></i><span>Bandeja de Documentos</span></a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Cierre -->
+        <li class="menu-item">
+          <div class="menu-section">
+            <div class="menu-section-header" (click)="toggleSection('cierre')">
+              <i class="pi pi-lock"></i>
+              <span>Cierre</span>
+              <i class="pi ml-auto" [ngClass]="{'pi-chevron-down': !expandedSections['cierre'], 'pi-chevron-up': expandedSections['cierre']}"></i>
+            </div>
+            <ul class="submenu" *ngIf="shouldShowSubmenu('cierre')">
+              <li><a routerLink="/cierre/tramite" routerLinkActive="active-link"><i class="pi pi-check-circle"></i><span>Cierre de Trámite</span></a></li>
+              <li><a routerLink="/cierre/baja-carnet" routerLinkActive="active-link"><i class="pi pi-id-card"></i><span>Baja Carnet de Extranjería</span></a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Menú Colapsado (Solo iconos de subitems) -->
+      <ul class="collapsed-icon-list" *ngIf="!menuVisible">
+        <!-- Inicio -->
+        <li class="collapsed-menu-item">
+          <a routerLink="/dashboard" routerLinkActive="active-link" pTooltip="Inicio" tooltipPosition="right">
+            <i class="pi pi-home"></i>
+          </a>
+        </li>
+        <!-- Recepción -->
+        <li class="collapsed-menu-item"><a routerLink="/recepcion/asignacion" routerLinkActive="active-link" pTooltip="Asignación" tooltipPosition="right"><i class="pi pi-user-plus"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/recepcion/reasignacion" routerLinkActive="active-link" pTooltip="Reasignación" tooltipPosition="right"><i class="pi pi-sync"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/recepcion/verificar-documentos" routerLinkActive="active-link" pTooltip="Verificar Documentos" tooltipPosition="right"><i class="pi pi-check-square"></i></a></li>
+        <!-- Evaluación -->
+        <li class="collapsed-menu-item"><a routerLink="/evaluacion/evaluar-tramite" routerLinkActive="active-link" pTooltip="Evaluar trámite" tooltipPosition="right"><i class="pi pi-file"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/evaluacion/reasignacion" routerLinkActive="active-link" pTooltip="Reasignación" tooltipPosition="right"><i class="pi pi-refresh"></i></a></li>
+        <!-- Control de Calidad -->
+        <li class="collapsed-menu-item"><a routerLink="/calidad/bandeja" routerLinkActive="active-link" pTooltip="Bandeja de Documentos (Calidad)" tooltipPosition="right"><i class="pi pi-inbox"></i></a></li>
+        <!-- Emisión del Título -->
+        <li class="collapsed-menu-item"><a routerLink="/titulo/registrar" routerLinkActive="active-link" pTooltip="Registrar Título" tooltipPosition="right"><i class="pi pi-pencil"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/titulo/ceremonia" routerLinkActive="active-link" pTooltip="Ceremonia" tooltipPosition="right"><i class="pi pi-users"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/titulo/bandeja" routerLinkActive="active-link" pTooltip="Bandeja de Documentos (Título)" tooltipPosition="right"><i class="pi pi-inbox"></i></a></li>
+        <!-- Consultas -->
+        <li class="collapsed-menu-item"><a routerLink="/consultas/tramite" routerLinkActive="active-link" pTooltip="Consulta de Trámite" tooltipPosition="right"><i class="pi pi-search"></i></a></li>
+        <!-- Gestión Documental -->
+        <li class="collapsed-menu-item"><a routerLink="/gestion-documental/elaborar" routerLinkActive="active-link" pTooltip="Elaborar Documento" tooltipPosition="right"><i class="pi pi-file-edit"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/gestion-documental/bandeja" routerLinkActive="active-link" pTooltip="Bandeja de Documentos (Gestión)" tooltipPosition="right"><i class="pi pi-inbox"></i></a></li>
+        <!-- Cierre -->
+        <li class="collapsed-menu-item"><a routerLink="/cierre/tramite" routerLinkActive="active-link" pTooltip="Cierre de Trámite" tooltipPosition="right"><i class="pi pi-check-circle"></i></a></li>
+        <li class="collapsed-menu-item"><a routerLink="/cierre/baja-carnet" routerLinkActive="active-link" pTooltip="Baja Carnet de Extranjería" tooltipPosition="right"><i class="pi pi-id-card"></i></a></li>
+      </ul>
+
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content" [ngClass]="{'wide': !menuVisible}">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,146 @@
+/* Estilos globales para botones */
+
+/* Variables */
+:root {
+  --migraciones-blue: rgba(0, 51, 102, 0.9);
+  --migraciones-blue-hover: rgba(0, 51, 102, 1);
+  --migraciones-red: #dc3545;
+  --migraciones-green: #28a745;
+  --migraciones-yellow: #fd7e14;
+}
+
+/* Estilo base para todos los botones */
+.p-button {
+  color: #ffffff;
+  background: #3B82F6;
+  border: 1px solid #3B82F6;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s;
+  border-radius: 6px;
+}
+
+/* Botón primario - azul (buscar, asignar, ingresar, etc) */
+.p-button-primary.p-button {
+  background-color: var(--migraciones-blue);
+  border-color: var(--migraciones-blue);
+  color: white;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--migraciones-blue-hover);
+    border-color: var(--migraciones-blue-hover);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+/* Botón secundario - con borde */
+.p-button-outlined {
+  color: #495057;
+  border-color: #ced4da;
+  background: #ffffff;
+  
+  &:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-color: #ced4da;
+  }
+}
+
+/* Nuevo botón personalizado con borde azul y texto azul */
+.p-button-custom-outlined {
+  background-color: #ffffff !important;
+  border: 1px solid var(--migraciones-blue) !important;
+  color: var(--migraciones-blue) !important;
+  border-radius: 4px;
+  
+  &:hover {
+    background-color: rgba(0, 51, 102, 0.04) !important;
+  }
+  
+  .p-button-icon {
+    color: var(--migraciones-blue) !important;
+  }
+}
+
+/* Variante pequeña */
+.p-button-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Variante para botones en tabla */
+.p-button-sm.p-button-primary {
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Botón de peligro/eliminación */
+.p-button-danger.p-button {
+  background-color: var(--migraciones-red);
+  border-color: var(--migraciones-red);
+  
+  &:hover:not(:disabled) {
+    background-color: darken(#dc3545, 10%);
+    border-color: darken(#dc3545, 10%);
+  }
+}
+
+/* Botón de éxito */
+.p-button-success.p-button {
+  background-color: var(--migraciones-green);
+  border-color: var(--migraciones-green);
+  
+  &:hover:not(:disabled) {
+    background-color: darken(#28a745, 10%);
+    border-color: darken(#28a745, 10%);
+  }
+}
+
+/* Botón de advertencia */
+.p-button-warning.p-button {
+  background-color: var(--migraciones-yellow);
+  border-color: var(--migraciones-yellow);
+  color: #212529;
+  
+  &:hover:not(:disabled) {
+    background-color: darken(#fd7e14, 10%);
+    border-color: darken(#fd7e14, 10%);
+  }
+}
+
+/* Botón con ancho completo */
+.p-button-full-width {
+  width: 100%;
+}
+
+/* Botón para acciones en tablas (Ver detalle) */
+.p-button-table-action {
+  background-color: #ffffff !important;
+  border: 1px solid #dee2e6 !important;
+  color: #333 !important;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #f8f9fa !important;
+    border-color: #ced4da !important;
+  }
+}
+
+/* Variante pequeña para botón de acción en tabla */
+.p-button-sm.p-button-table-action {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+} 

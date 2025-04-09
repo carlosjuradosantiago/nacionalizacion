@@ -1,0 +1,123 @@
+.dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  
+  h1 {
+    color: #333;
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  p {
+    margin-bottom: 1.25rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+}
+
+// Tarjetas de estadísticas
+.surface-card {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+  border: 1px solid #e0e0e0;
+  height: auto;
+  background-color: #fff;
+  padding-bottom: 0.75rem !important;
+  
+  // Estilos para los iconos principales (con círculos grises)
+  // Aplicar solo a los contenedores directos, no a los indicadores de porcentaje
+  > .flex > div:first-child {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    
+    i.text-xl {
+      font-size: 1.2rem;
+    }
+  }
+  
+  // Ajustes al contenido de las tarjetas
+  > div:last-child {
+    margin-bottom: 0;
+    
+    h2.text-3xl {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Trámites recientes
+.tramite-item {
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.6rem !important;
+  
+  &:last-child {
+    border-bottom: none !important;
+  }
+
+  .font-medium {
+    color: #0047AB;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .text-sm {
+    font-size: 0.8rem;
+  }
+  
+  .text-gray-500 {
+    font-size: 0.78rem;
+  }
+}
+
+// Bordes y separadores
+.border-bottom-1 {
+  border-bottom-color: #eaeaea !important;
+}
+
+// Barras de progreso
+.surface-300 {
+  background-color: #eeeeee;
+  overflow: hidden;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.bg-blue-500 {
+  background-color: #0055a4 !important;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.bg-green-500 {
+  background-color: #28a745 !important;
+  height: 100%;
+  border-radius: 3px;
+}
+
+// Texto
+.text-green-500 {
+  color: #28a745 !important;
+}
+
+.text-orange-500 {
+  color: #fd7e14 !important;
+}
+
+.text-red-500 {
+  color: #dc3545 !important;
+}
+
+.text-blue-600 {
+  color: #0047AB !important;
+}
+
+// Indicadores
+.pi-arrow-up {
+  font-size: 0.7rem;
+  margin-right: 2px;
+}
