@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 // Constants
-import { LOGIN_TEXTS } from '../../../core/constants/texts.constants';
+import { LOGIN_TEXTS } from '../../../../core/constants/texts.constants';
 
 @Component({
   selector: 'app-login',
